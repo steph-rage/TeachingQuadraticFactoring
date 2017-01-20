@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html lang='en'>
+<head>
+	<meta charset='utf8'>
+
+	<title>How to Factor Numbers</title>
+  	<meta name="description" content="How to Factor Numbers">
+  	<meta name="author" content="Stephanie Lage">
+
+  	<link rel='stylesheet' href='/static/FactorNumbers.css'/>
+
+  </head>
+
+  <body>
+
+  	<h2>Practice Factoring Some Numbers</h2>
+  	<div id='factor_this'>{{ number_to_factor }}<div>
+    <form action='' method='POST'>
+    {% for i in range(number_of_pairs) %}
+      <input type='number'/> * <input type='number'/>
+      <br>
+    {% endfor %}
+    <input type='submit'>
+    </form>
+
+  </body>
+  	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  	<script src='/static/FactorNumbers.js'></script>
+  </html>
