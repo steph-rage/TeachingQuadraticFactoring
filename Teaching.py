@@ -28,21 +28,34 @@ def load_what():
 
 @factorteacher.route('/factorteacher/what/factornumbers', methods = ['GET', 'POST'])
 def load_numbers_examples():
+	factor_pairs, number = None, None
+	right_answer, wrong_answer = False, False
 	if request.method == 'POST':
 		number = int(request.form['number'])
 		factor_pairs = find_factors(number)
 		entered_factor_pairs = []
-		for i in range(len(factor_pairs)):
-			ith_pair = [int(request.form['factor' + str(i) + '.1']), int(request.form['factor' + str(i) + '.2'])]
-			ith_pair.sort()
-			entered_factor_pairs.append(ith_pair)
-		factor_pairs.sort()
-		entered_factor_pairs.sort()
-		if entered_factor_pairs == factor_pairs:
-			print "Great job!"
-		else:
-			print "You suck"
+		try:
+			for i in range(len(factor_pairs)):
+				ith_pair = [int(request.form['factor' + str(i) + '.1']), int(request.form['factor' + str(i) + '.2'])]
+				ith_pair.sort()
+				entered_factor_pairs.append(ith_pair)
+			factor_pairs.sort()
+			entered_factor_pairs.sort()
+			if entered_factor_pairs == factor_pairs:
+				right_answer = True
+			else:
+				wrong_answer = True
+		except ValueError:
+			wrong_answer = True
+
 	number_to_factor = randint(2, 40)
 	number_of_pairs = len(find_factors(number_to_factor))
-	return render_template('FactorNumbers.html', number_to_factor=number_to_factor, number_of_pairs=number_of_pairs)
+	return render_template('FactorNumbers.html', 
+		number_to_factor = number_to_factor, 
+		number_of_pairs = number_of_pairs,
+		right_answer = right_answer,
+		wrong_answer = wrong_answer, 
+		old_number = number,
+		old_factor_pairs = factor_pairs,
+		)
 

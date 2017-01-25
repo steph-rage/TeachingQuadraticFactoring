@@ -27,8 +27,19 @@
       </div>
     </form>
 
-    <div class="message">{{ message }}</div>
+    {% if wrong_answer %}
+      <div class="incorrect-message">
+        <p>Sorry, that's not right. The factors of {{ old_number }} are: </p>
+        {% for pair in old_factor_pairs %}
+          <p>{{ pair[0] }} and {{ pair[1] }} because {{ pair[0] }} * {{ pair[1] }} = {{ old_number }}
+        {% endfor %}
+      </div>
+    {% elif right_answer %}
+      <div class="correct-message">
+        That's right! Great job!
+      </div>
+    {% endif %}
 
   </body>
-  	<!--<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>-->
+  	<!-- <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
   </html>
