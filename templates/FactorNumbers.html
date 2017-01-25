@@ -8,23 +8,27 @@
   	<meta name="description" content="How to Factor Numbers">
   	<meta name="author" content="Stephanie Lage">
 
-  	<link rel='stylesheet' href='/static/FactorNumbers.css'/>
+  	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 
   </head>
 
   <body>
 
   	<h2>Practice Factoring Some Numbers</h2>
-  	<div id='factor_this'>{{ number_to_factor }}<div>
+  	<p id='factor_this'>Find all of the pairs of factors of the number {{ number_to_factor }}<p>
     <form action='' method='POST'>
-    {% for i in range(number_of_pairs) %}
-      <input type='number'/> * <input type='number'/>
-      <br>
-    {% endfor %}
-    <input type='submit'>
+      {% for i in range(number_of_pairs) %}
+        <div class="numberfactors"><input name="factor{{ i }}.1" type='number'/></div> * <div class="numberfactors"><input name="factor{{ i }}.2" type='number'/></div>
+        <br>
+      {% endfor %}
+      <input type="hidden" value="{{ number_to_factor }}"  name="number"/>
+      <div class="submitbutton">
+        <input type='submit'>
+      </div>
     </form>
 
+    <div class="message">{{ message }}</div>
+
   </body>
-  	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-  	<script src='/static/FactorNumbers.js'></script>
+  	<!--<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>-->
   </html>
